@@ -17,13 +17,19 @@
   <div>
   	<p>1.<img src="1.jpg" width="200px" /> (X)</p>
   	<p>2.<img src="../../images/1.jpg" width="150px" /> (O)</p>
-  	<p>.</p>
-  	<p>.</p>
-  	<p>.</p>
-  	<p>.</p>
-  	<p>.</p>
-  	<p>.</p>
+  	<p>3.<img src="/images/2.jpg" width="150px" /> (X)</p>
+  	<p>4.<img src="/springGroup/images/2.jpg" width="150px" /> (O)</p>
+  	<p>5.<img src="/<%=request.getContextPath()%>/images/2.jpg" width="150px" /> (X)</p>
+  	<p>6.<img src="<%=request.getContextPath()%>/images/3.jpg" width="150px" /> (O)</p>
+  	<hr/>
+  	<p>
+  		<%
+  			for(int i=1; i<=7; i++) {
+  				out.println("<div><img src='"+request.getContextPath()+"/images/"+i+".jpg' width='100px'/></div>");
+  			}
+  		%>
   	
+  	</p>
   
   
   
