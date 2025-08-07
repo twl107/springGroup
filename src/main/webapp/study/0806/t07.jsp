@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-	String msgFlag = request.getParameter("msgFlag")==null ? "" : request.getParameter("msgFlag"); 
+  String msgFlag = request.getParameter("msgFlag")==null ? "" : request.getParameter("msgFlag");
 %>
 <!DOCTYPE html>
 <html>
@@ -13,10 +13,10 @@
   <script>
     'use strict';
     
-    if('<%=msgFlag%>'=='no') alert("로그인 실패~~ 회원정보를 확인 후 다시 로그인해 주세요.");
+    if('<%=msgFlag%>' == 'no') alert("로그인 실패~~ 회원정보를 확인후 다시 로그인해 주세요");
     
     function fCheck() {
-    	// 아이디/비밀번호 프론트 체크.....
+    	// 아이디/비밀번호 프론트 체크........
     	
     	myform.submit();
     }
@@ -25,7 +25,7 @@
 <body>
 <p><br/></p>
 <div class="container">
-  <h2>회원가입</h2>
+  <h2>회원 로그인</h2>
   <form name="myform" method="post" action="<%=request.getContextPath()%>/j0806/T07">
     <div class="mb-3">아이디
       <input type="text" name="mid" value="hkd1234" class="form-control" autofocus required />

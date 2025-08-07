@@ -12,10 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 @SuppressWarnings("serial")
 @WebServlet("/j0806/T06")
 public class T06 extends HttpServlet {
-	
+
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
 		response.setContentType("text/html; charset=utf-8");
 		request.setCharacterEncoding("utf-8");
 		
@@ -29,7 +28,7 @@ public class T06 extends HttpServlet {
 		
 		if(loginOk.equals("OK")) {
 			out.println("<script>");
-			out.println("alert('"+mid+"님 로그인 되었습니다.');");
+			out.println("alert('"+mid+" 님 로그인 되었습니다.');");
 			out.println("location.href='"+request.getContextPath()+"/study/0806/t06_member.jsp?mid="+mid+"';");
 			out.println("</script>");
 		}
@@ -39,7 +38,6 @@ public class T06 extends HttpServlet {
 			out.println("location.href='"+request.getContextPath()+"/study/0806/t06.jsp';");
 			out.println("</script>");
 		}
-		
-		
 	}
+	
 }

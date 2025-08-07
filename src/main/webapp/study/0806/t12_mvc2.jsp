@@ -6,13 +6,13 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <title>t08.jsp</title>
+  <title>t11_mvc.jsp</title>
 </head>
 <body>
 <p><br/></p>
 <div class="container">
   <h2>값 전송 연습</h2>
-  <form name="myform" method="post" action="<%=request.getContextPath()%>/j0806/T08">
+  <form name="myform" method="post" action="<%=request.getContextPath()%>/j0806/T11">
   	<div class="mb-3">성명
   	  <input type="text" name="name" value="홍길동" class="form-control mb-3" autofocus required />
   	</div>
@@ -30,9 +30,8 @@
   	  <input type="checkbox" name="hobby" value="수영" class="me-1" />수영 &nbsp;
   	  <input type="checkbox" name="hobby" value="배드민턴" class="me-1" />배드민턴 &nbsp;
   	  <input type="checkbox" name="hobby" value="바이크" class="me-1" />바이크
-  	  <input type="checkbox" name="hobby" value="바이크" class="me-1" checked />기타
   	</div>
-  	<div class="mb-3">직업
+   	<div class="mb-3">직업
   	  <select name="job" class="form-control">
   	    <option value="">선택</option>
   	    <option>회사원</option>
@@ -61,9 +60,9 @@
   	<div class="mb-3">첨부파일
   	  <input type="file" name="fileName" class="form-control"/>
   	</div>
-  	<div class="row">
+   	<div class="row">
   	  <div class="col"><input type="submit" value="전송(submit)" class="btn btn-success"/></div>
-  	  <!-- <div class="col"><input type="button" value="전송(button)" onclick="fCheck()" class="btn btn-success"/></div> -->
+  	  <!-- <div class="col"><input type="button" onclick="fCheck()" class="btn btn-success"/></div> -->
   	  <div class="col text-end"><input type="reset" value="다시입력" class="btn btn-warning"/></div>
   	</div>
   </form>

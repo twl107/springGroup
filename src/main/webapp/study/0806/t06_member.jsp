@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-	String mid = request.getParameter("mid");
+  String mid = request.getParameter("mid");
 %>
 <!DOCTYPE html>
 <html>
@@ -11,16 +11,15 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <title>t06_member.jsp</title>
   <script>
-  	'use strict'
-  	
-  	function logoutCheck() {
-			let ans = confirm("로그아웃 하시겠습니까?");
-			if(ans) {
-				alert('<%=mid%>님 로그아웃되셨습니다.');
-				location.href = 't06.jsp';
-			}
-		}
-  	
+    'use strict';
+    
+    function logoutCheck() {
+    	let ans = confirm("로그아웃 하시겠습니까?");
+    	if(ans) {
+    		alert('<%=mid%>님 로그아웃되셨습니다.');
+    		location.href = 't06.jsp';
+    	}
+    }
   </script>
 </head>
 <body>
@@ -28,9 +27,9 @@
 <div class="container">
   <h2>이곳은 회원 전용방 입니다.</h2>
   <hr/>
-  <p>현재 로그인된 사용자 : <%=mid %>사용자가 로그인 되었습니다.</p>
+  <p>현재 로그인된 사용자 : <%=mid%> 사용자가 로그인 되었습니다.</p>
   <hr/>
-  <p><a href="javascript:logoutCheck()" class="btn btn-success">로그아웃</a></p>
+  <p><a href="javascript:logoutCheck()" class="btn btn-success">로그아웃</a>
 </div>
 <p><br/></p>
 </body>

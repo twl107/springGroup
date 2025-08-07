@@ -1,17 +1,17 @@
 package study.j0806;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@SuppressWarnings({"serial","deprecation"})
-@WebServlet("/j0806/T08")
-public class T08 extends HttpServlet {
+@SuppressWarnings({"serial"})
+@WebServlet("/j0806/T12")
+public class T12 extends HttpServlet {
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -61,7 +61,26 @@ public class T08 extends HttpServlet {
 		// 서버에 정상적으로 처리된 자료(찍어본 자료)를 View(JSP)페이지로 전송시켜서 예쁘게 출력시켜준다.
 		content = content.replace("\n", "<br/>");
 		
-		response.sendRedirect(request.getContextPath()+"/study/0806/t08Ok.jsp?name="+URLEncoder.encode(name)+"&age="+age+"&gender="+URLEncoder.encode(gender)+"&hobby="+URLEncoder.encode(hobby)+"&job="+URLEncoder.encode(job)+"&mountain="+URLEncoder.encode(mountain)+"&content="+URLEncoder.encode(content)+"&fileName="+URLEncoder.encode(fileName));
+		
+		// BackEnd 체크완료후 정상적인 자료를 DB에 저장시켜준다.(저장완료 메세지(message)를 호출후 최종 View페이지(url)로 이동처리한다.)
+
+		// View페이지에서 앞의 자료를 보여주기위해 vo객체에 모두 담아후 request 저장소에 실어서 넘겨준다.
+		T12VO vo = new T12VO();
+		vo.setName(name);
+		vo.setAge(age);
+		vo.setGender(gender);
+		vo.setHobby(hobby);
+		vo.setJob(job);
+		vo.setMountain(mountain);
+		vo.setContent(content);
+		vo.setFileName(fileName);
+		
+		request.setAttribute("vo", vo);
+		
+		String viewPage = "/study/0806/t12Ok.jsp";
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
+		dispatcher.forward(request, response);
 	}
 	
 }

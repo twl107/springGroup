@@ -1,17 +1,18 @@
 package study.j0806;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-@SuppressWarnings({"serial","deprecation"})
-@WebServlet("/j0806/T08")
-public class T08 extends HttpServlet {
+@SuppressWarnings({"serial"})
+@WebServlet("/j0806/T11")
+public class T11 extends HttpServlet {
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -61,7 +62,34 @@ public class T08 extends HttpServlet {
 		// 서버에 정상적으로 처리된 자료(찍어본 자료)를 View(JSP)페이지로 전송시켜서 예쁘게 출력시켜준다.
 		content = content.replace("\n", "<br/>");
 		
-		response.sendRedirect(request.getContextPath()+"/study/0806/t08Ok.jsp?name="+URLEncoder.encode(name)+"&age="+age+"&gender="+URLEncoder.encode(gender)+"&hobby="+URLEncoder.encode(hobby)+"&job="+URLEncoder.encode(job)+"&mountain="+URLEncoder.encode(mountain)+"&content="+URLEncoder.encode(content)+"&fileName="+URLEncoder.encode(fileName));
+		request.setAttribute("name", name);
+		request.setAttribute("age", age);
+		request.setAttribute("gender", gender);
+		request.setAttribute("hobby", hobby);
+		request.setAttribute("job", job);
+		request.setAttribute("mountain", mountain);
+		request.setAttribute("content", content);
+		request.setAttribute("fileName", fileName);
+		
+//		HttpSession session = request.getSession();
+//		session.setAttribute("name", name);
+//		session.setAttribute("age", age);
+//		session.setAttribute("gender", gender);
+//		session.setAttribute("hobby", hobby);
+//		session.setAttribute("job", job);
+//		session.setAttribute("mountain", mountain);
+//		session.setAttribute("content", content);
+//		session.setAttribute("fileName", fileName);
+		
+//		request.setAttribute("message", "");
+//		request.setAttribute("url", request.getContextPath()+"/study/0806/t11Ok.jsp");
+		// request.setAttribute("url", request.getContextPath()+"/study/0806/t11Ok.jsp?name="+name+"&age="+age+"&gender="+gender);
+		
+		String viewPage = "/study/0806/t11Ok.jsp";
+//		String viewPage = "/include/message.jsp";
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
+		dispatcher.forward(request, response);
 	}
 	
 }
