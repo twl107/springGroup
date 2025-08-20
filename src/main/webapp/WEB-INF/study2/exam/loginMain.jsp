@@ -5,15 +5,15 @@
 <html>
 <head>
   <meta charset="UTF-8">
-	<jsp:include page="/include/bs5.jsp" />
+  <jsp:include page="/include/bs5.jsp" />
   <title>loginMain.jsp</title>
   <script>
-  	'use strict';
-  	
-  	function logout() {
-			let ans = confirm("로그아웃 하시겠습니까?");
-			if(ans) location.href = "${ctp}/study2/exam/Logout"
-		}
+    'use strict';
+    
+    function logout() {
+    	let ans = confirm("로그아웃 하시겠습니까?");
+    	if(ans) location.href = "${ctp}/study2/exam/Logout";
+    }
   </script>
 </head>
 <body>
@@ -26,7 +26,7 @@
   <div>회원 닉네임 : ${sNickName}</div>
   <hr/>
   <div class="text-center">
-  	<button type="button" onclick="logout()" class="btn btn-success">로그아웃</button>
+    <button type="button" onclick="logout()" class="btn btn-success">로그아웃</button>
   </div>
 </div>
 <p><br/></p>

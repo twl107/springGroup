@@ -5,14 +5,14 @@
 <html>
 <head>
   <meta charset="UTF-8">
-	<jsp:include page="/include/bs5.jsp" />
+  <jsp:include page="/include/bs5.jsp" />
   <title>login.jsp</title>
 </head>
 <body>
 <p><br/></p>
 <div class="container">
   <form name="myform" method="post" action="${ctp}/study2/exam/LoginOk">
-		<table class="table table-bordered text-center">
+    <table class="table table-bordered text-center">
       <tr>
         <td colspan="2" class="bg-secondary-subtle"><font size="5">로 그 인</font></td>
       </tr>

@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 @SuppressWarnings("serial")
 @WebServlet("/study2/login/Login")
-public class Login extends HttpServlet{
-	
+public class Login extends HttpServlet {
+
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Cookie[] cookies = request.getCookies();
@@ -30,6 +30,6 @@ public class Login extends HttpServlet{
 		String viewPage = "/WEB-INF/study2/login/login.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);
-		
 	}
+	
 }

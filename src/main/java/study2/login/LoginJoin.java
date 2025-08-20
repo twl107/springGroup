@@ -1,4 +1,4 @@
-package study2.test;
+package study2.login;
 
 import java.io.IOException;
 
@@ -10,12 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @SuppressWarnings("serial")
-@WebServlet("/study2/Test4")
-public class Test4 extends HttpServlet {
+@WebServlet("/study2/login/LoginJoin")
+public class LoginJoin extends HttpServlet {
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String viewPage = "/WEB-INF/study2/test/test4.jsp";
+		String viewPage = "/WEB-INF/study2/login/loginJoin.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);
 	}

@@ -58,7 +58,7 @@ public class LoginDAO {
 		}
 	}
 
-	// 아이디 검색 ******
+	// 아이디 검색
 	public LoginVO getLoginIdCheck(String mid, String pwd) {
 		vo = new LoginVO();
 		try {
@@ -73,20 +73,17 @@ public class LoginDAO {
 				vo.setMid(rs.getString("mid"));
 				vo.setPwd(rs.getString("pwd"));
 				vo.setNickName(rs.getString("nickName"));
+				vo.setName(rs.getString("name"));
 				vo.setAge(rs.getInt("age"));
 				vo.setGender(rs.getString("gender"));
 				vo.setAddress(rs.getString("address"));
-				
 			}
-			
 		} catch (SQLException e) {
-			System.out.println("SQL오류~~~" + e.getMessage());
+			System.out.println("SQL오류~~" + e.getMessage());
 		} finally {
 			rsClose();
 		}
 		return vo;
 	}
-	
-	
 	
 }

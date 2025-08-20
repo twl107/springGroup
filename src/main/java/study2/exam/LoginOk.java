@@ -3,7 +3,6 @@ package study2.exam;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -14,8 +13,8 @@ import javax.servlet.http.HttpSession;
 
 @SuppressWarnings("serial")
 @WebServlet("/study2/exam/LoginOk")
-public class LoginOk extends HttpServlet{
-	
+public class LoginOk extends HttpServlet {
+
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String mid = request.getParameter("mid")==null ? "" : request.getParameter("mid");
@@ -24,21 +23,20 @@ public class LoginOk extends HttpServlet{
 		
 		LoginDAO dao = new LoginDAO();
 		
-		// 로그인아이디체크 마음대로 작성 dao에 생성자 생성
 		LoginVO vo = dao.getLoginIdCheck(mid, pwd);
 		//System.out.println("vo : " + vo);
 		
 		PrintWriter out = response.getWriter();
 		
 		if(vo.getMid() != null) {
-			// 정상적으로 인증이 확인되었다면 아이디를 쿠키에 저장할 지 판별한다.
+			// 정상적으로 인증이 확인되었다면 아이디를 쿠키에 저장할시 판별한다.
 			Cookie cookieMid = new Cookie("cMid", mid);
 			cookieMid.setPath("/");
 			if(idSave.equals("on")) cookieMid.setMaxAge(60*60*24*7);
-			else  cookieMid.setMaxAge(0);
+			else cookieMid.setMaxAge(0);
 			response.addCookie(cookieMid);
 			
-			// 로그인 중에 항상 기억하고자 하는 값이 있다면 세션에 저장처리한다.(아이디,닉네임)
+			// 로그인중에 항상 기억하고자 하는 값이 있다면 세션에 저장처리한다.(아이디,닉네임)
 			HttpSession session = request.getSession();
 			session.setAttribute("sMid", mid);
 			session.setAttribute("sNickName", vo.getNickName());
@@ -59,4 +57,5 @@ public class LoginOk extends HttpServlet{
 			out.println("</script>");
 		}
 	}
+	
 }

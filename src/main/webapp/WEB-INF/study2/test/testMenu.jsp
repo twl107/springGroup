@@ -19,6 +19,9 @@
   <p><a href="${ctp}/study2/filter/T1_filter">T1_filter</a></p>
   <p><a href="${ctp}/study2/init/login">init login테스트</a></p>
   <p><a href="${ctp}/javaGroup">init login테스트2</a></p>
+  <p><a href="${ctp}/study2/login/Login">init login테스트3</a></p>
+  <p><a href="${ctp}/study2/password/PassForm">암호화 테스트</a></p>
+  <p><a href="${ctp}/study2/ajax/AjaxMenu">aJax 테스트</a></p>
 </div>
 <p><br/></p>
 </body>

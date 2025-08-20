@@ -14,15 +14,16 @@ import javax.servlet.http.HttpSession;
 
 @SuppressWarnings("serial")
 @WebServlet("/study2/exam/Logout")
-public class Logout extends HttpServlet{
-	
+public class Logout extends HttpServlet {
+
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String mid = (String) session.getAttribute("sMid");
 		session.invalidate();
 		
-//		String viewPage = "/WEB-INF/study2/login/login.jsp";
+		//String viewPage = "/WEB-INF/study2/login/login.jsp";
+//		String viewPage = "/study2/login/Login";
 //		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 //		dispatcher.forward(request, response);
 		
@@ -32,4 +33,5 @@ public class Logout extends HttpServlet{
 		out.println("location.href='"+request.getContextPath()+"/study2/exam/Login';");
 		out.println("</script>");
 	}
+	
 }

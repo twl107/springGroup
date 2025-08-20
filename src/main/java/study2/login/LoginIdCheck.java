@@ -1,4 +1,4 @@
-package study2.test;
+package study2.login;
 
 import java.io.IOException;
 
@@ -10,12 +10,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @SuppressWarnings("serial")
-@WebServlet("/study2/Test4")
-public class Test4 extends HttpServlet {
+@WebServlet("/study2/login/LoginIdCheck")
+public class LoginIdCheck extends HttpServlet {
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String viewPage = "/WEB-INF/study2/test/test4.jsp";
+		String mid = request.getParameter("mid")==null ? "" : request.getParameter("mid");
+		
+		LoginDAO dao = new LoginDAO();
+		LoginVO vo = dao.getLoginIdCheck(mid);
+		
+		int res = 0;
+		if(vo.getMid() == null) res = 1;
+		
+		request.setAttribute("res", res);
+		request.setAttribute("mid", mid);
+		
+		String viewPage = "/WEB-INF/study2/login/loginIdCheck.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);
 	}

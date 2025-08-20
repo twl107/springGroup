@@ -26,7 +26,7 @@ public class T1NO extends HttpServlet {
 		System.out.println("introduce : " + introduce);
 		
 		PrintWriter out = response.getWriter();
-		out.println("이곳은 T1NO컨트롤러 입니다.");
+		out.println("이곳은 T1Ok컨트롤러 입니다.");
 		
 		request.setAttribute("message", "T1NO컨트롤러에서 보냅니다.");
 		

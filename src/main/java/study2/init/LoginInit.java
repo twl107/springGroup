@@ -24,13 +24,11 @@ public class LoginInit extends HttpServlet {
 		String officeName = getServletContext().getInitParameter("officeName");
 		String officeEmail = getServletContext().getInitParameter("officeEmail");
 		
-		// application 객체 사용하기 위한 생성처리
+		// application객체 사용하기위한 생성처리
 		ServletContext application = request.getServletContext();
-//		application.setAttribute("application변수", "값");
 		application.setAttribute("aTest", "값test");
 		
-		
-		// session 객체 사용하기 위한 생성처리
+		// session객체 사용하기위한 생성처리
 		HttpSession session = request.getSession();
 		
 		session.setAttribute("sOfficeName", officeName);
