@@ -17,13 +17,57 @@
 				type	: 'get',
 				success: function (res) {
 					// 테이블로 편집처리
+					let js = JSON.parse(res);
 					
-					let str = res;
-					demo.innerHTML = str;
+					let str = '<h2 class="text-center mb-4">전체 회원 리스트</h2>';
+					str += '<table class="table table-hover text-center">';
+					str += '<tr class="table-dark">';
+					str += '<th>아이디</th><th>닉네임</th><th>성명</th><th>나이</th><th>성별</th><th>주소</th>';
+					str += '</tr>';
+					
+					for(let j of js){
+						str += '<tr>';
+						str += '<td>'+j.mid+'</td>';
+						str += '<td>'+j.nickName+'</td>';
+						str += '<td>'+j.name+'</td>';
+						str += '<td>'+j.age+'</td>';
+						str += '<td>'+j.gender+'</td>';
+						str += '<td>'+j.address+'</td>';
+						str += '</tr>';
+					}
+					str += '</table>';
+					
+					$("#demo").html(str);
+					
 				},
 				error	: function() { alert("전송오류!"); }
 			});
 		}
+  	
+  	function friendInput() {
+  		$.ajax({
+  			url		: '${ctp}/study2/ajax/friend/FriendInput',
+  			type 	: 'get',
+  			success: function (res) {
+  				let str = res;
+					demo.innerHTML = str;
+  			},
+  			error	: function() { alert("전송오류!"); }
+  		});
+  	}
+  	
+  	function friendSearch() {
+  		$.ajax({
+  			url		: '${ctp}/study2/ajax/friend/FriendSearch',
+  			type 	: 'get',
+  			success: function (res) {
+  				let str = res;
+					demo.innerHTML = str;
+  			},
+  			error	: function() { alert("전송오류!"); }
+  		});
+  	}
+  	
   </script>
 </head>
 <body>
