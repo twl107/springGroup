@@ -58,7 +58,13 @@
   <c:forEach var="vo" items="${vos}" varStatus="st">
     <table class="table table-borderless m-0 p-0">
 	    <tr>
-	      <td>번호 : ${vo.idx}<c:if test="${sAdmin == 'adminOK'}"><a href="javascript:guestDelete(${vo.idx})" class="btn btn-danger btn-sm">삭제</a></c:if></td>
+	      <td>번호 : ${vo.idx}
+	      	<c:if test="${sAdmin == 'adminOK'}"><a href="javascript:guestDelete(${vo.idx})" class="btn btn-danger btn-sm">삭제</a></c:if>
+	      	<c:if test="${sAdmin != 'adminOK' && sNickName == vo.name}">
+	      		<a href="#" class="btn btn-warning btn-sm">수정</a>
+	      		<a href="#" class="btn btn-danger btn-sm">삭제</a>
+	      	</c:if>
+	      </td>
 	      <td class="text-end">방문IP : ${vo.hostIp}</td>
 	    </tr>
 	  </table>
