@@ -31,6 +31,10 @@
 				  </ul>
 				</div>
       </li>
+      <li class="nav-item">
+        <c:if test="${!empty sMid}"><a class="nav-link" href="${ctp}/study2/login/Logout">Logout</a></c:if>
+        <c:if test="${empty sMid}"><a class="nav-link" href="${ctp}/study2/login/Login">Login</a></c:if>
+      </li>
     </ul>
   </div>
 </nav>
