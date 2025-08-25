@@ -8,6 +8,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <jsp:include page="/include/bs5.jsp" />
   <title>boardList.jsp</title>
+  <script>
+  	'use strict';
+  	
+  	function pageSizeCheck() {
+  		let pageSize = $("pageSize").val();
+  		location.href = "BoardList.bo?pageSize="+pageSize;
+	}
+  </script>
 </head>
 <body>
 <jsp:include page="/include/header.jsp" />
@@ -20,7 +28,15 @@
 		</tr>
 		<tr>
 			<td><a href="BoardInput.bo" class="btn btn-success btn-sm">글쓰기</a></td>
-			<td class="text-end"></td>
+			<td class="text-end">
+				<select name="pageSize" id="pageSize" onchange="pageSizeCheck()">
+          <option>5</option>
+          <option>10</option>
+          <option>15</option>
+          <option>20</option>
+          <option>30</option>
+        </select>
+			</td>
 		</tr>
 	</table>			
   <table class="table table-hover text-center">

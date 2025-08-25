@@ -3,7 +3,6 @@ package study2.login;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -65,4 +64,5 @@ public class LoginOk extends HttpServlet {
 			out.println("</script>");
 		}
 	}
+	
 }

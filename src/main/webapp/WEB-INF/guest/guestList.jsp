@@ -116,7 +116,6 @@
   <c:forEach var="i" begin="${(curBlock*blockSize)+1}" end="${(curBlock*blockSize)+blockSize}" varStatus="st">
 	  <c:if test="${i <= totPage && i == pag}">[<a href="GuestList.gu?pag=${i}" class="text-decoration-none text-dark link-primary"><font color="red"><b>${i}</b></font></a>]</c:if>
 	  <c:if test="${i <= totPage && i != pag}">[<a href="GuestList.gu?pag=${i}" class="text-decoration-none text-dark link-primary">${i}</a>]</c:if>
-	  <%-- [<a href="GuestList.gu?pag=${i}" class="text-decoration-none text-dark link-primary">${i}</a>] --%>
   </c:forEach>
   <c:if test="${curBlock < lastBlock}">[<a href="GuestList.gu?pag=${(curBlock+1)*blockSize + 1}" class="text-decoration-none text-dark link-primary">다음블럭</a>]</c:if>
   <c:if test="${pag < totPage}">[<a href="GuestList.gu?pag=${totPage}" class="text-decoration-none text-dark link-primary">마지막페이지</a>]</c:if>
