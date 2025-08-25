@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+// 싱글톤
 public class GetConn {
 	private static Connection conn = null;
 	

@@ -65,5 +65,4 @@ public class LoginOk extends HttpServlet {
 			out.println("</script>");
 		}
 	}
-	
 }

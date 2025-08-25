@@ -1,4 +1,4 @@
-package study2.mapping;
+package board;
 
 import java.io.IOException;
 
@@ -10,56 +10,44 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import common.CommonInterface;
+
 @SuppressWarnings("serial")
-@WebServlet("*.test5")
-public class Extension5Controller extends HttpServlet {
+@WebServlet("*.bo")
+public class BoardController extends HttpServlet {
 	
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Extension4Interface command = null;
+		CommonInterface command = null;		// 인터페이스
+		String viewPage = "/WEB-INF/board/";
 		
-		String viewPage = "/WEB-INF/study2/mapping/";
+		String com = request.getRequestURI();
+		com = com.substring(com.lastIndexOf("/")+1, com.lastIndexOf("."));
 		
-		String uri = request.getRequestURI();
-		String com = uri.substring(uri.lastIndexOf("/")+1, uri.lastIndexOf("."));
-		
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession();	// 세션 인증
 		String mid = (String) session.getAttribute("sMid");
+		
 		if(mid == null) {
 			request.setAttribute("message", "로그인 후 사용하세요");
 			request.setAttribute("url", request.getContextPath()+"/study2/login/Login");
 			viewPage = "/include/message";
 		}
-		else if(com.equals("Home5")) {
-			command = new Home5Command();
+		else if(com.equals("BoardList")) {		// 1. 커맨드에서 처리하고 뷰로 보내기
+			command = new BoardListCommand();		// 구현객체 
 			command.execute(request, response);
-			viewPage += "home5";
+			viewPage += "boardList";						// 가져온 데이터를 뷰페이지로 보냄
 		}
-		else if(com.equals("Guest5")) {
-			command = new Guest5Command();
+		else if(com.equals("BoardInput")) {		// 2. 뷰로 보내기
+			viewPage += "boardInput";
+		}
+		else if(com.equals("BoardInputOk")) {
+			command = new BoardInputOkCommand();
 			command.execute(request, response);
-			viewPage += "guest5";
+			viewPage = "/include/message";			// 처리해서 메시지로 보냄						
 		}
-		else if(com.equals("Board5")) {
-			command = new Board5Command();
-			command.execute(request, response);
-			viewPage += "board5";
-		}
-		else if(com.equals("Pds5")) {
-			command = new Pds5Command();
-			command.execute(request, response);
-			viewPage += "pds5";
-		}
-		else {
-			viewPage += "extension5";
-		}
-		
 		viewPage += ".jsp";
-		System.out.println("viewPage : " + viewPage);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);
-		
-	}	
-	
+	}
 }

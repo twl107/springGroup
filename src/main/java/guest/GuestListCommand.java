@@ -15,10 +15,49 @@ public class GuestListCommand implements CommonInterface {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		GuestDAO dao = new GuestDAO();
 		
-		List<GuestVO> vos = dao.getGuestList();
+		// 1. 현재 페이지번호를 구해온다. (첫번째 페이지는 1)
+		int pag = request.getParameter("pag")==null ? 1 : Integer.parseInt(request.getParameter("pag"));
+		
+		// 2. 한 페이지 분량을 구한다.(따로 지정을 안 할 시 여기선 1Page당 5건으로 한다.)
+		int pageSize = request.getParameter("pageSize")==null ? 5 : Integer.parseInt(request.getParameter("pageSize"));
+		
+		// 3. 총 레코드 건수 구한다.(sql명령어(함수) 중 count함수를 이용)
+		int totRecCnt =dao.getTotRecCnt();
+		
+		// 4. 총 페이지 건수를 구한다.
+		int totPage = (int) Math.ceil((double)totRecCnt / pageSize);
+		
+		// 5. 현재 페이지에서 출력시켜줄 '시작 인덱스번호'를 구한다.
+		int startIndexNo = (pag - 1) * pageSize;
+		
+		// 6. 현재 화면에 표시될 시작 실제 번호를 구한다.
+		int curScrStartNo = totRecCnt - startIndexNo;
+		
+		List<GuestVO> vos = dao.getGuestList(startIndexNo, pageSize);
+		
+		
+		// 블록페이징처리(시작블록을 0으로 처리했다. 1블록의 크기는 3)
+		// 1. 블록의 크기결정(3)
+		int blockSize = 3;
+		
+		// 2. 현재 페이지가 속한 블록번호를 구한다.(예:총레코드수가 23개일 경우, 1페이지 분량이 5개일 경우, 총 페이지 수는 5Page이다.)
+		// 이때 0블록은 '1/2/3', 1블록은 '4/5'
+		int curBlock = (pag - 1) / blockSize;
+		
+		// 3. 마지막 블록 구하기 : 앞의 조건인 경우는 마지막 블록이 1이 된다.
+		int lastBlock = (totPage - 1) / blockSize;
+
+		
+		request.setAttribute("pag", pag);
+		request.setAttribute("pageSize", pageSize);
+		request.setAttribute("totRecCnt", totRecCnt);
+		request.setAttribute("totPage", totPage);
+		request.setAttribute("curScrStartNo", curScrStartNo);
+		request.setAttribute("blockSize", blockSize);
+		request.setAttribute("curBlock", curBlock);
+		request.setAttribute("lastBlock", lastBlock);
 		
 		request.setAttribute("vos", vos);
-
 	}
 
 }

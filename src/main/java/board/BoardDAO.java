@@ -1,4 +1,4 @@
-package guest;
+package board;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,13 +9,13 @@ import java.util.List;
 
 import common.GetConn;
 
-public class GuestDAO {
+public class BoardDAO {
 	private Connection conn = GetConn.getConn();
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	
-	String sql = "";
-	GuestVO vo = null;
+	private String sql;
+	BoardVO vo = null;
 	
 	public void pstmtClose() {
 		if(pstmt != null) {
@@ -35,31 +35,35 @@ public class GuestDAO {
 			}
 		}
 	}
-
-	// 전체 게시글 가져오기
-	public List<GuestVO> getGuestList(int startIndexNo, int pageSize) {
-		List<GuestVO> vos = new ArrayList<GuestVO>();
+	
+	// 게시글 전체보기 (select로 읽어오기)
+	public List<BoardVO> getBoardList(int startIndexNo, int pageSize) {
+		List<BoardVO> vos = new ArrayList<BoardVO>();
 		try {
-			sql = "select * from guest order by idx desc limit ?,?";
+			sql = "select * from board order by idx desc limit ?,?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, startIndexNo);
 			pstmt.setInt(2, pageSize);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				vo = new GuestVO();
+				vo = new BoardVO();
 				vo.setIdx(rs.getInt("idx"));
-				vo.setName(rs.getString("name"));
+				vo.setMid(rs.getString("mid"));
+				vo.setNickName(rs.getString("nickName"));
+				vo.setTitle(rs.getString("title"));
 				vo.setContent(rs.getString("content"));
-				vo.setEmail(rs.getString("email"));
-				vo.setHomePage(rs.getString("homepage"));
-				vo.setvDate(rs.getString("vDate"));
 				vo.setHostIp(rs.getString("hostIp"));
+				vo.setOpenSw(rs.getString("openSw"));
+				vo.setReadNum(rs.getInt("readNum"));
+				vo.setwDate(rs.getString("wDate"));
+				vo.setGood(rs.getInt("good"));
+				vo.setComplaint(rs.getString("complaint"));
 				
 				vos.add(vo);
 			}
 		} catch (SQLException e) {
-			System.out.println("sql오류(getGuestList) : " + e.getMessage());
+			System.out.println("SQL오류(getBoardList) : " + e.getMessage());
 		}
 		finally {
 			rsClose();
@@ -67,51 +71,34 @@ public class GuestDAO {
 		return vos;
 	}
 
-	// 방명록 DB에 글 저장하기
-	public int setGuestInputOk(GuestVO vo) {
+	// 게시글 등록처리 select 이외에는 pstmt
+	public int setBoardInputOk(BoardVO vo) {
 		int res = 0;
+		
 		try {
-			sql = "insert into guest values (default, ?, ?, ?, ?, default, ?)";
+			sql = "insert into board values (default,?,?,?,?,?,?,default,default,default,default)";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, vo.getName());
-			pstmt.setString(2, vo.getContent());
-			pstmt.setString(3, vo.getEmail());
-			pstmt.setString(4, vo.getHomePage());
+			pstmt.setString(1, vo.getMid());
+			pstmt.setString(2, vo.getNickName());
+			pstmt.setString(3, vo.getTitle());
+			pstmt.setString(4, vo.getContent());
 			pstmt.setString(5, vo.getHostIp());
+			pstmt.setString(6, vo.getOpenSw());
 			res = pstmt.executeUpdate();
-			
 		} catch (SQLException e) {
-			System.out.println("sql오류(setGuestInputOk) : " + e.getMessage());
+			System.out.println("SQL오류(setBoardInputOk) : " + e.getMessage());
 		}
 		finally {
 			pstmtClose();
 		}
 		return res;
 	}
-
-	// 방명록 게시글 삭제처리
-	public int setGuestDelete(int idx) {
-		int res = 0;
-		try {
-			sql = "delete from guest where idx=?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, idx);
-			res = pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			System.out.println("sql오류(setGuestDelete) : " + e.getMessage());
-		}
-		finally {
-			pstmtClose();
-		}
-		return res;
-	}
-
-	// 총 레코드 건수 구하기
+	
+	// 전체 게시글의 수 구하기
 	public int getTotRecCnt() {
 		int totRecCnt = 0;
 		try {
-			sql = "select count(*) as cnt from guest";
+			sql = "select count(*) as cnt from board";
 			pstmt =conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
