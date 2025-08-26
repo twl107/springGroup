@@ -11,13 +11,13 @@
   <script>
   	'use strict';
   	
-  	/* function pageSizeCheck() {																// pageSize 변경 시 1번으로 이동
+  	function pageSizeCheck() {																// pageSize 변경 시 1번으로 이동
   		let pageSize = $("#pageSize").val();
-  		location.href = "BoardList.bo?pag=1&pageSize="+pageSize;
-		} */
+  		location.href = "BoardList.bo?pageSize="+pageSize;
+		}
 		
 		
-		// pageSize 변경 시 내가 보고있는 번호 기준으로 변경
+		/* // pageSize 변경 시 내가 보고있는 번호 기준으로 변경
   	function pageSizeCheck() {
 			let pag = ${pag};																					// 현재 페이지 번호와 페이지 크기 가져옴
 			let curPageSize = ${pageSize};
@@ -29,7 +29,7 @@
 			let newPag = Math.floor(startIndexNo / newPageSize) + 1;	// 페이지 번호 계산
 			
   		location.href = "BoardList.bo?pag=" + newPag + "&pageSize=" + newPageSize;
-		}
+		} */
   </script>
 </head>
 <body>
@@ -65,7 +65,7 @@
   	<c:forEach var="vo" items="${vos}" varStatus="st">	<!-- 반복시킬 내용 출력-->
   		<tr>
   			<td>${curScrStartNo}</td> <!-- 게시글 번호 -->
-  			<td class="text-start">${vo.title}</td>
+  			<td class="text-start"><a href="BoardContent.bo?idx=${vo.idx}" class="text-decoration-none text-dark link-primary">${vo.title}</a></td>
   			<td>${vo.nickName}</td>
   			<td>${vo.wDate}</td>
   			<td>${vo.readNum}</td>
@@ -74,17 +74,15 @@
   	</c:forEach>
   </table>
   <!-- 블록페이지 시작 -->
-<div class="d-flex justify-content-center">
-	<ul class="pagination">
-	  <c:if test="${pag > 1}"><li class="page-item"><a href="BoardList.bo?pag=1&pageSize=${pageSize}" class="page-link">첫페이지</a></li></c:if>
-	  <c:if test="${curBlock > 0}"><li class="page-item"><a href="BoardList.bo?pag=${(curBlock-1)*blockSize + 1}&pageSize=${pageSize}" class="page-link">이전블럭</a></li></c:if>
-	  <c:forEach var="i" begin="${(curBlock*blockSize)+1}" end="${(curBlock*blockSize)+blockSize}" varStatus="st">
-		  <c:if test="${i <= totPage && i == pag}"><li class="page-item"><a href="BoardList.bo?pag=${i}&pageSize=${pageSize}" class="page-link"><font color="red"><b>${i}</b></font></a></li></c:if>
-		  <c:if test="${i <= totPage && i != pag}"><li class="page-item"><a href="BoardList.bo?pag=${i}&pageSize=${pageSize}" class="page-link">${i}</a></li></c:if>
-	  </c:forEach>
-	  <c:if test="${curBlock < lastBlock}"><li class="page-item"><a href="BoardList.bo?pag=${(curBlock+1)*blockSize + 1}&pageSize=${pageSize}" class="page-link">다음블럭</a></li></c:if>
-	  <c:if test="${pag < totPage}"><li class="page-item"><a href="BoardList.bo?pag=${totPage}&pageSize=${pageSize}" class="page-link">마지막페이지</a></li></c:if>
-	</ul>
+<div class="pagination justify-content-center">
+  <c:if test="${pag > 1}"><a href="BoardList.bo?pag=1&pageSize=${pageSize}" class="page-item page-link text-dark">첫페이지</a></c:if>
+  <c:if test="${curBlock > 0}"><a href="BoardList.bo?pag=${(curBlock-1)*blockSize + 1}&pageSize=${pageSize}" class="page-item page-link text-dark">이전블럭</a></c:if>
+  <c:forEach var="i" begin="${(curBlock*blockSize)+1}" end="${(curBlock*blockSize)+blockSize}" varStatus="st">
+	  <c:if test="${i <= totPage && i == pag}"><a href="BoardList.bo?pag=${i}&pageSize=${pageSize}" class="page-item page-link active bg-secondary border-secondary">${i}</a></c:if>
+	  <c:if test="${i <= totPage && i != pag}"><a href="BoardList.bo?pag=${i}&pageSize=${pageSize}" class="page-item page-link text-dark">${i}</a></c:if>
+  </c:forEach>
+  <c:if test="${curBlock < lastBlock}"><a href="BoardList.bo?pag=${(curBlock+1)*blockSize + 1}&pageSize=${pageSize}" class="page-item page-link text-dark">다음블럭</a></c:if>
+  <c:if test="${pag < totPage}"><a href="BoardList.bo?pag=${totPage}&pageSize=${pageSize}" class="page-item page-link text-dark">마지막페이지</a></c:if>
 </div>
 <!-- 블록페이지 끝 -->
 </div>

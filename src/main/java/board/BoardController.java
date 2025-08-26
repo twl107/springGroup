@@ -45,6 +45,23 @@ public class BoardController extends HttpServlet {
 			command.execute(request, response);
 			viewPage = "/include/message";			// 처리해서 메시지로 보냄						
 		}
+		else if(com.equals("BoardContent")) {		// 1. 커맨드에서 처리하고 뷰로 보내기
+			command = new BoardContentCommand();		// 구현객체 
+			command.execute(request, response);
+			viewPage += "boardContent";						// 가져온 데이터를 뷰페이지로 보냄
+		}
+		else if(com.equals("BoardGoodCheck")) {
+			command = new BoardGoodCheckCommand(); 
+			command.execute(request, response);
+			return;
+		}
+		else if(com.equals("BoardGoodCheckPlusMinus")) {
+			command = new BoardGoodCheckPlusMinusCommand(); 
+			command.execute(request, response);
+			return;
+		}
+		
+		
 		viewPage += ".jsp";
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
