@@ -183,16 +183,38 @@ select customer from customers
 	where custid in (select custid from orders o
 	where o.bookid in (select bookid from books where publisher='대한미디어' or publisher='삼성당'));
 	
+	
 -- 1. '손흥민'이 구매한 도서의 이름, 정가, 구매가격, 할인 받은 금액(정가와 판매가격의 차)를 출력하시오.
-
+select b.bookname as 책이름, b.price as 정가, o.saleprice as 구매가격, (b.price-o.saleprice) as 할인금액
+	from customers c
+	join orders o on c.custid = o.custid
+	join books b on o.bookid = b.bookid
+	where c.customer = '손흥민';
+	
 -- 2. 고객별로 주문한 도서의 총수량과 총판매액을 구하시오.
-
+select c.customer as 고객명, count(o.custid) as 총수량, format(sum(o.saleprice),0) as 총판매액
+	from orders o
+	join customers c on c.custid = o.custid
+	group by c.customer;
+	
 -- 3. 도서의 가격과 판매가격의 차이가 가장 많은 주문을 출력하시오.
-
+select o.orderid as 주문번호, b.price - o.saleprice as 할인금액
+	from orders o
+	join books b on o.bookid = b.bookid
+	order by b.price - o.saleprice desc limit 1;
+	
 -- 4. 고객별 평균 구매액을 구하시오. 단 출력은 고객명, 평균 구매액을 추력하시오.
+select c.customer as 고객명, format(avg(o.saleprice),0) as 평균구매액
+	from customers c
+	join orders o on o.custid = c.custid
+	group by c.customer;
 	
 -- 5. '2025년 5월 1일' 이후부터 최근까지 판매된 책의 이름과 판매금액을 출력하시오.
-	
+select b.bookname as 책이름, o.saleprice as 판매금액, o.orderdate as 판매날짜
+	from orders o
+	join books b on b.bookid = o.bookid
+	where o.orderdate >= '2025-05-01'
+	order by o.orderdate desc;
 	
 	
 	

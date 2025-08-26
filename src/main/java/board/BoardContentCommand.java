@@ -1,10 +1,13 @@
 package board;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import common.CommonInterface;
 
@@ -16,8 +19,21 @@ public class BoardContentCommand implements CommonInterface {
 		
 		BoardDAO dao = new BoardDAO();
 		
-		// 게시글 조회수 1씩 증가시키기
-		dao.setBoardReadNumPlus(idx);
+		HttpSession session = request.getSession();
+		
+		@SuppressWarnings("unchecked")
+		List<Integer> viewIdx = (List<Integer>)session.getAttribute("viewIdx");
+		
+		if(viewIdx==null) {
+			viewIdx = new ArrayList<Integer>();
+		}
+		
+		if(!viewIdx.contains(idx)) {
+			dao.setBoardReadNumPlus(idx);
+			viewIdx.add(idx);
+		}
+		
+		session.setAttribute("viewIdx", viewIdx);
 		
 		BoardVO vo = dao.getBoarContent(idx);
 		
