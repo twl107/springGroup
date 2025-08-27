@@ -14,7 +14,7 @@ import common.CommonInterface;
 @SuppressWarnings("serial")
 @WebServlet("*.gu")
 public class GuestController extends HttpServlet {
-	
+
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		CommonInterface command = null;
@@ -54,10 +54,10 @@ public class GuestController extends HttpServlet {
 			command.execute(request, response);
 			return;
 		}
-		
 		viewPage += ".jsp";
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);
 	}
+	
 }

@@ -29,7 +29,7 @@ public class GuestInputOkCommand implements CommonInterface {
 		
 		int res = dao.setGuestInputOk(vo);
 		
-		if(res !=0) {
+		if(res != 0) {
 			request.setAttribute("message", "방명록에 글이 등록되었습니다.");
 			request.setAttribute("url", "GuestList.gu");
 		}
@@ -37,5 +37,7 @@ public class GuestInputOkCommand implements CommonInterface {
 			request.setAttribute("message", "방명록에 글 등록 실패~~~");
 			request.setAttribute("url", "GuestInput.gu");
 		}
+		
 	}
+
 }

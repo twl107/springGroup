@@ -3,14 +3,13 @@ package guest;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import common.CommonInterface;
-import study2.exam.LoginVO;
 import study2.login.LoginDAO;
+import study2.login.LoginVO;
 
 public class AdminOkCommand implements CommonInterface {
 
@@ -20,11 +19,11 @@ public class AdminOkCommand implements CommonInterface {
 		String pwd = request.getParameter("pwd")==null ? "" : request.getParameter("pwd");
 		
 		LoginDAO dao = new LoginDAO();
-
-		study2.login.LoginVO vo = dao.getLoginIdCheck(mid);
 		
-
+		LoginVO vo = dao.getLoginIdCheck(mid);
+		
 		if(vo.getMid() != null) {
+			// 비밀번호 복호화(X), 로그인시 입력된 비밀번호를 salt값과 함께 암호화 시킨후 DB비밀번호와 비교한다.
 			String salt = vo.getPwd().substring(0, 5);
 			pwd = salt + (Integer.parseInt(pwd) ^ Integer.parseInt(salt)) + "";
 			
@@ -40,6 +39,7 @@ public class AdminOkCommand implements CommonInterface {
 			request.setAttribute("message", "관리자 인증 실패~~");
 			request.setAttribute("url", "Admin.gu");
 		}
+		
 	}
 
 }

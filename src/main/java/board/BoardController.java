@@ -15,56 +15,85 @@ import common.CommonInterface;
 @SuppressWarnings("serial")
 @WebServlet("*.bo")
 public class BoardController extends HttpServlet {
-	
+
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		CommonInterface command = null;		// 인터페이스
+		CommonInterface command = null;
 		String viewPage = "/WEB-INF/board/";
 		
 		String com = request.getRequestURI();
 		com = com.substring(com.lastIndexOf("/")+1, com.lastIndexOf("."));
 		
-		HttpSession session = request.getSession();	// 세션 인증
+		HttpSession session = request.getSession();
 		String mid = (String) session.getAttribute("sMid");
 		
 		if(mid == null) {
-			request.setAttribute("message", "로그인 후 사용하세요");
+			request.setAttribute("message", "로그인후 사용하세요");
 			request.setAttribute("url", request.getContextPath()+"/study2/login/Login");
 			viewPage = "/include/message";
 		}
-		else if(com.equals("BoardList")) {		// 1. 커맨드에서 처리하고 뷰로 보내기
-			command = new BoardListCommand();		// 구현객체 
+		else if(com.equals("BoardList")) {
+			command = new BoardListCommand();
 			command.execute(request, response);
-			viewPage += "boardList";						// 가져온 데이터를 뷰페이지로 보냄
+			viewPage += "boardList";
 		}
-		else if(com.equals("BoardInput")) {		// 2. 뷰로 보내기
+		else if(com.equals("BoardInput")) {
 			viewPage += "boardInput";
 		}
 		else if(com.equals("BoardInputOk")) {
 			command = new BoardInputOkCommand();
 			command.execute(request, response);
-			viewPage = "/include/message";			// 처리해서 메시지로 보냄						
+			viewPage = "/include/message";
 		}
-		else if(com.equals("BoardContent")) {		// 1. 커맨드에서 처리하고 뷰로 보내기
-			command = new BoardContentCommand();		// 구현객체 
+		else if(com.equals("BoardContent")) {
+			command = new BoardContentCommand();
 			command.execute(request, response);
-			viewPage += "boardContent";						// 가져온 데이터를 뷰페이지로 보냄
+			viewPage += "boardContent";
 		}
 		else if(com.equals("BoardGoodCheck")) {
-			command = new BoardGoodCheckCommand(); 
+			command = new BoardGoodCheckCommand();
 			command.execute(request, response);
 			return;
 		}
 		else if(com.equals("BoardGoodCheckPlusMinus")) {
-			command = new BoardGoodCheckPlusMinusCommand(); 
+			command = new BoardGoodCheckPlusMinusCommand();
 			command.execute(request, response);
 			return;
 		}
-		
-		
+		else if(com.equals("BoardDelete")) {
+			command = new BoardDeleteCommand();
+			command.execute(request, response);
+			viewPage = "/include/message";
+		}
+		else if(com.equals("BoardUpdate")) {
+			command = new BoardUpdateCommand();
+			command.execute(request, response);
+			viewPage += "boardUpdate";
+		}
+		else if(com.equals("BoardUpdateOk")) {
+			command = new BoardUpdateOkCommand();
+			command.execute(request, response);
+			viewPage = "/include/message";
+		}
+		else if(com.equals("BoardSearchList")) {
+			command = new BoardSearchListCommand();
+			command.execute(request, response);
+			viewPage += "boardSearchList";
+		}
+		else if(com.equals("BoardReplyInput")) {
+			command = new BoardReplyInputCommand();
+			command.execute(request, response);
+			return;
+		}
+		else if(com.equals("BoardReplyDelete")) {
+			command = new BoardReplyDeleteCommand();
+			command.execute(request, response);
+			return;
+		}
 		viewPage += ".jsp";
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);
 	}
+	
 }

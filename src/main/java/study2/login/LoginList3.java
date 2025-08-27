@@ -25,7 +25,6 @@ public class LoginList3 extends HttpServlet {
 		Map<String, String> map = new HashMap<String, String>();
 		
 		JSONArray jArray = new JSONArray();
-		
 		for(LoginVO vo : vos) {
 			map.put("mid", vo.getMid());
 			map.put("nickName", vo.getNickName());
@@ -37,6 +36,7 @@ public class LoginList3 extends HttpServlet {
 			JSONObject jObj = new JSONObject(map);
 			jArray.add(jObj);
 		}
+		
 		response.getWriter().write(jArray + "");
 	}
 	

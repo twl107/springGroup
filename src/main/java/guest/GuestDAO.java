@@ -52,7 +52,7 @@ public class GuestDAO {
 				vo.setName(rs.getString("name"));
 				vo.setContent(rs.getString("content"));
 				vo.setEmail(rs.getString("email"));
-				vo.setHomePage(rs.getString("homepage"));
+				vo.setHomePage(rs.getString("homePage"));
 				vo.setvDate(rs.getString("vDate"));
 				vo.setHostIp(rs.getString("hostIp"));
 				
@@ -79,7 +79,6 @@ public class GuestDAO {
 			pstmt.setString(4, vo.getHomePage());
 			pstmt.setString(5, vo.getHostIp());
 			res = pstmt.executeUpdate();
-			
 		} catch (SQLException e) {
 			System.out.println("sql오류(setGuestInputOk) : " + e.getMessage());
 		}
@@ -89,15 +88,14 @@ public class GuestDAO {
 		return res;
 	}
 
-	// 방명록 게시글 삭제처리
+	// 게시글 삭제처리
 	public int setGuestDelete(int idx) {
 		int res = 0;
 		try {
-			sql = "delete from guest where idx=?";
+			sql = "delete from guest where idx = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, idx);
 			res = pstmt.executeUpdate();
-			
 		} catch (SQLException e) {
 			System.out.println("sql오류(setGuestDelete) : " + e.getMessage());
 		}
@@ -112,7 +110,7 @@ public class GuestDAO {
 		int totRecCnt = 0;
 		try {
 			sql = "select count(*) as cnt from guest";
-			pstmt =conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
 			rs.next();

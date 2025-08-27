@@ -2,7 +2,6 @@ package study2.login;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -20,7 +19,7 @@ public class LoginList2 extends HttpServlet {
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		LoginDAO dao = new LoginDAO();
+		//LoginDAO dao = new LoginDAO();
 		//List<LoginVO> vos = dao.getLoginList();
 		
 		Map<String, String> map = new HashMap<>(); 
