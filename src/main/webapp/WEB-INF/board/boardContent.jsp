@@ -114,6 +114,43 @@
     		error : function() { alert("전송오류!!"); }
     	});
     }
+    
+    // 댓글 수정창 모두 닫기(처음 폼이 로드될 때)
+    $(function() {
+    	$(".replyInnerContent").hide();
+    });
+    
+    // 댓글 수정버튼(√) 클릭 시 해당 댓글의 수정창 보여주기
+   	function replyUpdate(idx) {
+   		$(".replyInnerContent").hide();
+   		$("#demo"+idx).show();
+		}
+    
+    // 댓글 수정창에서 '댓글수정'버튼 클릭 시에 수행
+    function replyUpdateOk(idx) {
+    	let content = $("#replyUpdateContent"+idx).val();
+    	let query = {
+    			idx			: idx,
+    			content	: content
+    	}
+    	
+    	$.ajax({
+    		url  : "BoardReplyUpdateOk.bo",
+    		type : "post",
+    		data : query,
+    		success:function(res) {
+    			if(res != '0') {
+    				alert('댓글이 수정되었습니다.');
+    				location.reload();
+    			}
+    			else alert("댓글 수정 실패~~");
+    		},
+    		error : function() { alert("전송오류!!"); }
+    	});
+		}
+    
+    
+    
   </script>
   <style>
     th {
@@ -144,7 +181,10 @@
     <tr>
       <th>글제목</th>
       <td colspan="3">${vo.title}
-        (<a href="javascript:goodCheck()" class="text-decoration-none" title="좋아요">❤️</a> : ${vo.good})
+        (<a href="javascript:goodCheck()" class="text-decoration-none" title="좋아요">좋아요 :
+            <c:if test="${!fn:contains(sContentIdx, 'boardGood'+=vo.idx)}">♥</c:if>
+            <c:if test="${fn:contains(sContentIdx, 'boardGood'+=vo.idx)}"><font color='red'>♥</font></c:if>
+         </a> : ${vo.good})
         /
         <a href="javascript:goodCheckPlus()" class="text-decoration-none" title="좋아요">👍</a>
         <a href="javascript:goodCheckMinus()" class="text-decoration-none" title="싫어요">👎</a>
@@ -196,19 +236,34 @@
   <table class="table table-hover text-center">
     <tr>
       <th>작성자</th>
-      <th>댓글내용</th>
+      <th class="text-start ps-3">댓글내용</th>
       <th>댓글일자</th>
       <th>댓글IP</th>
     </tr>
     <c:forEach var="replyVo" items="${replyVos}" varStatus="st">
       <tr>
-        <td class="text-start">
+        <td>
           ${replyVo.nickName}
-          <c:if test="${sMid == replyVo.mid}"><a href="javascript:replyDelete(${replyVo.idx})" title="삭제" class="text-decoration-none">x</a></c:if>
+          <c:if test="${sMid == replyVo.mid}">
+          	(
+          	<a href="javascript:replyUpdate(${replyVo.idx})" title="댓글수정" class="text-decoration-none">√</a>,
+          	<a href="javascript:replyDelete(${replyVo.idx})" title="댓글삭제" class="text-decoration-none">x</a>
+          	)	
+        	</c:if>
         </td>
         <td class="text-start">${fn:replace(replyVo.content, newLine, "<br/>")}</td>
         <td>${replyVo.wDate}</td>
         <td>${replyVo.hostIp}</td>
+      </tr>
+      <tr id="demo${replyVo.idx}" class="replyInnerContent">
+      	<td colspan="4" class="text-center ps-5 pe-4 pt-1 pb-1">
+      		<form>
+      			<div class="input-group">
+      				<textarea rows="2" name="replyUpdateContent" id="replyUpdateContent${replyVo.idx}" class="form-control">${replyVo.content}</textarea>
+      				<input type="button" value="댓글수정" onclick="replyUpdateOk(${replyVo.idx})" class="btn btn-success btn-sm"/>
+      			</div>
+      		</form>
+      	</td>
       </tr>
     </c:forEach>
   </table>

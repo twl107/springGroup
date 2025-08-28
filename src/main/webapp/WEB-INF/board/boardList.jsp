@@ -57,12 +57,12 @@
             <c:if test="${sMid == vo.mid || sAdmin == 'adminOK'}">
 		          <a href="BoardContent.bo?idx=${vo.idx}&pag=${pag}&pageSize=${pageSize}" class="text-decoration-none text-dark link-primary">
 		            <c:if test="${sAdmin == 'adminOK'}"><font color="red">(비밀글)</font></c:if>${vo.title}
-		          </a>
+		          </a> <c:if test="${vo.replyCnt != 0}">(${vo.replyCnt})</c:if>
 		          <c:if test="${vo.hour_diff <= 24}"><img src="${ctp}/images/new.gif" /></c:if>
             </c:if>
           </c:if>
           <c:if test="${vo.openSw != 'NO'}">
-	          <a href="BoardContent.bo?idx=${vo.idx}&pag=${pag}&pageSize=${pageSize}" class="text-decoration-none text-dark link-primary">${vo.title}</a>
+	          <a href="BoardContent.bo?idx=${vo.idx}&pag=${pag}&pageSize=${pageSize}" class="text-decoration-none text-dark link-primary">${vo.title}</a> <c:if test="${vo.replyCnt != 0}">(${vo.replyCnt})</c:if>
 	          <c:if test="${vo.hour_diff <= 24}"><img src="${ctp}/images/new.gif" /></c:if>
           </c:if>
         </td>
