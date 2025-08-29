@@ -38,6 +38,7 @@ public class PdsController extends HttpServlet {
 			viewPage += "pdsList";
 		}
 		else if(com.equals("PdsInput")) {
+			request.setAttribute("part", request.getParameter("part"));
 			viewPage += "pdsInput";
 		}
 		else if(com.equals("PdsInputOk")) {
@@ -46,11 +47,10 @@ public class PdsController extends HttpServlet {
 			viewPage = "/include/message";
 		}
 		else if(com.equals("PdsDelete")) {
-			command = new PdsDeleteCommand();
+			//command = new PdsDeleteCommand();
 			command.execute(request, response);
 			return;
 		}
-		
 		viewPage += ".jsp";
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);

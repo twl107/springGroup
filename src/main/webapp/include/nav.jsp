@@ -4,21 +4,20 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <div class="container-fluid">
     <ul class="navbar-nav">
-      <li class="nav-item me-3">
+      <li class="nav-item">
         <a class="nav-link active" href="http://192.168.50.57:9090/springGroup">HOME</a>
-        <!-- <a class="nav-link active" href="http://175.205.166.20:9090/springGroup">HOME</a> -->
       </li>
-      <li class="nav-item me-3">
+      <li class="nav-item">
         <a class="nav-link" href="GuestList.gu">Guest</a>
       </li>
       <c:if test="${!empty sMid}">
-	      <li class="nav-item me-3">
+	      <li class="nav-item">
 	        <a class="nav-link" href="BoardList.bo">Board</a>
 	      </li>
-	      <li class="nav-item me-3">
-	        <a class="nav-link" href="Pds.pds">PDS</a>
+	      <li class="nav-item">
+	        <a class="nav-link" href="PdsList.pds">PDS</a>
 	      </li>
-	      <li class="nav-item me-3">
+	      <li class="nav-item">
 	        <div class="dropdown">
 					  <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">Study</button>
 					  <ul class="dropdown-menu">
@@ -32,6 +31,8 @@
 					    <li><a class="dropdown-item" href="${ctp}/study2/mapping/Extension5.test5">확장자매핑연습5</a></li>
 					    <li><a class="dropdown-item" href="${ctp}/study2/uuid/Uuid.st">UUID연습</a></li>
 					    <li><a class="dropdown-item" href="${ctp}/study2/pdsTest/PdsTest.st">file업로드연습</a></li>
+					    <li><a class="dropdown-item" href="Sha.st">SHA암호화</a></li>
+					    <li><a class="dropdown-item" href="ModalTest.st">Modal 연습</a></li>
 					  </ul>
 					</div>
 	      </li>
