@@ -9,6 +9,7 @@ public class LoginVO {
 	private int age;
 	private String gender;
 	private String address;
+	private String photo;
 	
 	public int getIdx() {
 		return idx;
@@ -59,9 +60,18 @@ public class LoginVO {
 		this.nickName = nickName;
 	}
 	
+	public String getPhoto() {
+		return photo;
+	}
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
 	@Override
 	public String toString() {
 		return "LoginVO [idx=" + idx + ", mid=" + mid + ", pwd=" + pwd + ", nickName=" + nickName + ", name=" + name
-				+ ", age=" + age + ", gender=" + gender + ", address=" + address + "]";
+				+ ", age=" + age + ", gender=" + gender + ", address=" + address + ", photo=" + photo + "]";
 	}
+	
+	
+	
 }

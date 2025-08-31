@@ -46,6 +46,7 @@ public class LoginOk extends HttpServlet {
 				HttpSession session = request.getSession();
 				session.setAttribute("sMid", mid);
 				session.setAttribute("sNickName", vo.getNickName());
+				session.setAttribute("sPhoto", vo.getPhoto());
 				
 	//			String viewPage = "/WEB-INF/study2/login/loginMain.jsp";
 	//			RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
@@ -56,6 +57,7 @@ public class LoginOk extends HttpServlet {
 				out.println("location.href='"+request.getContextPath()+"/study2/login/LoginMain';");
 				out.println("</script>");
 			}
+			
 		}
 		else {
 			out.println("<script>");

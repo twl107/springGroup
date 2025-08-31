@@ -78,6 +78,7 @@ public class LoginDAO {
 				vo.setAge(rs.getInt("age"));
 				vo.setGender(rs.getString("gender"));
 				vo.setAddress(rs.getString("address"));
+				vo.setPhoto(rs.getString("photo"));
 			}
 		} catch (SQLException e) {
 			System.out.println("SQL오류(getLoginIdCheck)~~" + e.getMessage());
@@ -184,5 +185,22 @@ public class LoginDAO {
 		}
 		return res;
 	}
+
+	public int updatePhoto(String mid, String filesystemName) {
+		int res = 0;
+		try {
+			sql = "update friend set photo = ? where mid = ? ";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, filesystemName);
+			pstmt.setString(2, mid);
+			res = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("SQL오류(getLoginList)~~" + e.getMessage());
+		} finally {
+			pstmtClose();
+		}
+		return res;
+	}
+	
 	
 }

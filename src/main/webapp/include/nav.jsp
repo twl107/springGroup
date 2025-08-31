@@ -21,7 +21,7 @@
 	        <div class="dropdown">
 					  <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">Study</button>
 					  <ul class="dropdown-menu">
-					    <li><a class="dropdown-item" href="${ctp}/login/FriendInfo">회원정보</a></li>
+					    <li><a class="dropdown-item" href="${ctp}/study2/login/LoginMain">회원정보</a></li>
 					    <li><a class="dropdown-item" href="${ctp}/study2/ajax/friend/FriendMain">AJAX연습</a></li>
 					    <li><a class="dropdown-item" href="${ctp}/study2/mapping/Directory">디렉토리매핑연습</a></li>
 					    <li><a class="dropdown-item" href="${ctp}/study2/mapping/Extension.do">확장자매핑연습1</a></li>

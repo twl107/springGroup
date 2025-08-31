@@ -230,6 +230,16 @@
   </div>
   <hr/>
   <div>이곳은 회원 전용서비스 구역입니다.</div>
+  <div class="mt-4">
+  	<h3>회원사진</h3>
+  		<c:if test="${empty sPhoto}">
+  			<img src="${ctp}/images/default.jpg" id="memberPhoto" class="thumbnail" width="150px" />
+  		</c:if>
+  		<c:if test="${!empty sPhoto}">
+  			<img src="${ctp}/images/${sPhoto}" id="memberPhoto" class="thumbnail" width="150px" />
+  		</c:if>
+  		<p><a href="#" class="btn btn-primary btn-sm mt-3" data-bs-toggle="modal" data-bs-target="#photoModal">사진 등록/변경</a></p>
+  </div>
   <div>회원 아이디 : ${sMid}</div>
   <div>회원 닉네임 : ${sNickName}</div>
   <hr/>
@@ -243,6 +253,29 @@
     <button type="button" onclick="logout()" class="btn btn-success">로그아웃</button>
   </div>
 </div>
+
+<div class="modal" id="photoModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">회원 사진 등록</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form name="photoForm" method="post" action="PhotoUploadCommand.lo" enctype="multipart/form-data">
+          <p>등록할 사진(JPG, GIF 파일)을 선택하세요.</p>
+          <div class="input-group">
+            <input type="file" name="fName" id="fName" class="form-control" accept=".jpg,.gif">
+          </div>
+          <div class="mt-3 d-grid">
+          	<button type="submit" class="btn btn-primary">사진 업로드</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 <p><br/></p>
 <jsp:include page="/include/footer.jsp" />
 </body>

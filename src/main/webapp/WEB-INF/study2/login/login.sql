@@ -9,15 +9,19 @@ create table friend (
   age  int  default 20,
   gender char(2) default '여자',
   address varchar(30),
-  photo varchar(50),		/* 회원사진 filesysyem 이름으로 저장 */
+  photo varchar(50),		/* 회원사진 filesystem 이름으로 저장 */
   unique key(mid),
   unique key(nickName)
 );
+
+alter table friend add column photo varchar(50);
 
 desc friend;
 drop table friend;
 
 insert into friend values (default, 'admin', '1234', '관리맨', '관리자', 33, '남자', '서울');
+insert into friend values (default, 'ikj1234', '1234', '이장군', '이기자', 23, '남자', '청주');
+insert into friend values (default, 'hkd1234', '1234', '홍장군', '홍길동', 28, '남자', '경기');
 
 select * from friend;
 
